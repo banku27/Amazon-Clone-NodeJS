@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
+  // sign up user
   void signUpUser({
     required BuildContext context,
     required String email,
@@ -37,7 +38,6 @@ class AuthService {
         },
       );
 
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -53,6 +53,7 @@ class AuthService {
     }
   }
 
+  // sign in user
   void signInUser({
     required BuildContext context,
     required String email,
@@ -69,25 +70,29 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
-
-      // ignore: use_build_context_synchronously
       httpErrorHandle(
-          response: res,
-          context: context,
-          onSuccess: () async {
-            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-            SharedPreferences prefs = await SharedPreferences.getInstance();
-            await prefs.setString(
-                'x-auth-token', jsonDecode(res.body)['token']);
-            Navigator.pushNamedAndRemoveUntil(
-                context, HomeScreen.routeName, (route) => false);
-          });
+        response: res,
+        context: context,
+        onSuccess: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+          await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            HomeScreen.routeName,
+            (route) => false,
+          );
+        },
+      );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
 
-  void getUserData(BuildContext context) async {
+  // get user data
+  void getUserData(
+    BuildContext context,
+  ) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('x-auth-token');
@@ -105,6 +110,7 @@ class AuthService {
       );
 
       var response = jsonDecode(tokenRes.body);
+
       if (response == true) {
         http.Response userRes = await http.get(
           Uri.parse('$uri/'),
@@ -113,6 +119,7 @@ class AuthService {
             'x-auth-token': token
           },
         );
+
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
