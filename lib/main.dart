@@ -1,4 +1,5 @@
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
+import 'package:amazon_clone_nodejs/features/auth/services/auth_services.dart';
 import 'package:amazon_clone_nodejs/provider/user_provider.dart';
 import 'package:amazon_clone_nodejs/router.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,20 @@ void main() {
   ], child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final AuthService authService = AuthService();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   // This widget is the root of your application.
   @override
