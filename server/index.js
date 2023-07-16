@@ -9,7 +9,7 @@ mongoose.connect(
     ).then(()=>console.log('Database connected')).catch((err)=>{console.log(err)});
 
 const app=express();
-
+app.use(express.json());
 app.use(authRouter);
 
 app.listen(process.env.PORT,()=>{
