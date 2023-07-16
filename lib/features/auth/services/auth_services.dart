@@ -1,9 +1,9 @@
 import 'dart:convert';
 
+import 'package:amazon_clone_nodejs/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone_nodejs/constants/error_handling.dart';
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
 import 'package:amazon_clone_nodejs/constants/utils.dart';
-import 'package:amazon_clone_nodejs/features/home/screens/home_screen.dart';
 import 'package:amazon_clone_nodejs/models/user.dart';
 import 'package:amazon_clone_nodejs/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +38,7 @@ class AuthService {
         },
       );
 
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -70,16 +71,19 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
+          // ignore: use_build_context_synchronously
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
           await prefs.setString('x-auth-token', jsonDecode(res.body)['token']);
+          // ignore: use_build_context_synchronously
           Navigator.pushNamedAndRemoveUntil(
             context,
-            HomeScreen.routeName,
+            BottomBar.routeName,
             (route) => false,
           );
         },
@@ -120,6 +124,7 @@ class AuthService {
           },
         );
 
+        // ignore: use_build_context_synchronously
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
       }
