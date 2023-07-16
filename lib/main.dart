@@ -1,5 +1,6 @@
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
 import 'package:amazon_clone_nodejs/features/auth/services/auth_services.dart';
+import 'package:amazon_clone_nodejs/features/home/screens/home_screen.dart';
 import 'package:amazon_clone_nodejs/provider/user_provider.dart';
 import 'package:amazon_clone_nodejs/router.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    authService.getUserData(context);
   }
 
   // This widget is the root of your application.
@@ -48,7 +50,9 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
         useMaterial3: true,
       ),
-      home: const AuthScreen(),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? const HomeScreen()
+          : const AuthScreen(),
     );
   }
 }

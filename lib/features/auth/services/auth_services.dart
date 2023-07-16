@@ -95,29 +95,27 @@ class AuthService {
       if (token == null) {
         prefs.setString('x-auth-token', '');
       }
-      // http.Response res = await http.post(
-      //   Uri.parse('$uri/api/signin'),
-      //   body: jsonEncode({
-      //     'email': email,
-      //     'password': password,
-      //   }),
-      //   headers: <String, String>{
-      //     'Content-Type': 'application/json; charset=UTF-8',
-      //   },
-      // );
 
-      // ignore: use_build_context_synchronously
-      // httpErrorHandle(
-      //     response: res,
-      //     context: context,
-      //     onSuccess: () async {
-      //       Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-      //       SharedPreferences prefs = await SharedPreferences.getInstance();
-      //       await prefs.setString(
-      //           'x-auth-token', jsonDecode(res.body)['token']);
-      //       Navigator.pushNamedAndRemoveUntil(
-      //           context, HomeScreen.routeName, (route) => false);
-      //     });
+      var tokenRes = await http.post(
+        Uri.parse('$uri/tokenIsValid'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': token!
+        },
+      );
+
+      var response = jsonDecode(tokenRes.body);
+      if (response == true) {
+        http.Response userRes = await http.get(
+          Uri.parse('$uri/'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': token
+          },
+        );
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
+      }
     } catch (e) {
       showSnackBar(context, e.toString());
     }
