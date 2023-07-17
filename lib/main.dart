@@ -1,5 +1,6 @@
 import 'package:amazon_clone_nodejs/common/widgets/bottom_bar.dart';
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
+import 'package:amazon_clone_nodejs/features/admin/screens/admin_screen.dart';
 import 'package:amazon_clone_nodejs/features/auth/services/auth_services.dart';
 import 'package:amazon_clone_nodejs/provider/user_provider.dart';
 import 'package:amazon_clone_nodejs/router.dart';
@@ -51,7 +52,9 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const BottomBar()
+          ? Provider.of<UserProvider>(context).user.type == 'user'
+              ? const BottomBar()
+              : const AdminScreen()
           : const AuthScreen(),
     );
   }
