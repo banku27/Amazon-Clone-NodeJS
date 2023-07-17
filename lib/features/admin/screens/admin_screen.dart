@@ -1,3 +1,4 @@
+import 'package:amazon_clone_nodejs/features/admin/screens/product_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -15,10 +16,7 @@ class _AdminScreenState extends State<AdminScreen> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    // const AdminScreen(),
-    const Center(
-      child: Text('home screen'),
-    ),
+    const ProductScreen(),
     const Center(
       child: Text('Analytics screen'),
     ),
