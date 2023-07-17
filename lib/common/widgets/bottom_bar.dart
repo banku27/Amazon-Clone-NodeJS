@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constants/global_variables.dart';
+import '../../features/account/screens/account_screen.dart';
 import '../../features/home/screens/home_screen.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -18,8 +19,10 @@ class _BottomBarState extends State<BottomBar> {
 
   List<Widget> pages = [
     const HomeScreen(),
-    // const AccountScreen(),
-    // const CartScreen(),
+    const AccountScreen(),
+    const Center(
+      child: Text('CART SCREEN'),
+    )
   ];
 
   void updatePage(int page) {
@@ -33,7 +36,7 @@ class _BottomBarState extends State<BottomBar> {
     // final userCartLen = context.watch<UserProvider>().user.cart.length;
 
     return Scaffold(
-      // body: pages[_page],
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
