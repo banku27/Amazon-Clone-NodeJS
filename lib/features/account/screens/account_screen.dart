@@ -1,3 +1,4 @@
+import 'package:amazon_clone_nodejs/features/account/widgets/orders.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -54,7 +55,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(height: 10),
           TopButtons(),
           SizedBox(height: 20),
-          // Orders(),
+          Orders(),
         ],
       ),
     );
