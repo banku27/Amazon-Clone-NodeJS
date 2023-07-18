@@ -1,4 +1,6 @@
 import 'package:amazon_clone_nodejs/features/admin/screens/product_screen.dart';
+import 'package:amazon_clone_nodejs/features/admin/services/admin_services.dart';
+import 'package:amazon_clone_nodejs/models/product.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/global_variables.dart';
@@ -14,7 +16,8 @@ class _AdminScreenState extends State<AdminScreen> {
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
-
+  AdminServices adminServices = AdminServices();
+  List<Product>? products = [];
   List<Widget> pages = [
     const ProductScreen(),
     const Center(
@@ -29,6 +32,16 @@ class _AdminScreenState extends State<AdminScreen> {
     setState(() {
       _page = page;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchAllProducts();
+  }
+
+  fetchAllProducts() async {
+    products = await adminServices.fetchAllProducts(context);
   }
 
   @override
