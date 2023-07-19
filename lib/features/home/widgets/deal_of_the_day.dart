@@ -37,8 +37,8 @@ class _DealOfDayState extends State<DealOfDay> {
             padding: const EdgeInsets.only(left: 15),
             alignment: Alignment.topLeft,
             child: const Text(
-              '\$100',
-              style: TextStyle(fontSize: 18),
+              '₹104900',
+              style: TextStyle(fontSize: 18, color: Colors.red),
             ),
           ),
           Container(
@@ -47,6 +47,11 @@ class _DealOfDayState extends State<DealOfDay> {
             child: const Text(
               'MacBook Air M2 - 512 SSD',
               maxLines: 2,
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w500,
+              ),
               overflow: TextOverflow.ellipsis,
             ),
           ),
