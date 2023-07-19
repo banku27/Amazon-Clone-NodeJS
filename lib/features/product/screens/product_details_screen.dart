@@ -7,6 +7,7 @@ import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/rating_star.dart';
 import '../../../constants/global_variables.dart';
 import '../../search/screens/search_screen.dart';
+import '../services/product_detail_services.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const String routeName = '/product-details';
@@ -23,6 +24,8 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   double avgRating = 0;
   double myRating = 0;
+  final ProductDetailsServices productDetailsServices =
+      ProductDetailsServices();
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
@@ -231,7 +234,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 Icons.star,
                 color: GlobalVariables.secondaryColor,
               ),
-              onRatingUpdate: (rating) {},
+              onRatingUpdate: (rating) {
+                productDetailsServices.rateProduct(
+                    context: context, product: widget.product, rating: rating);
+              },
             ),
             const SizedBox(height: 20),
           ],
