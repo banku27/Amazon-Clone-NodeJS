@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/global_variables.dart';
+import '../../search/screens/search_screen.dart';
 import '../widgets/address_box.dart';
 import '../widgets/carousel_image.dart';
 import '../widgets/top_categories.dart';
@@ -17,6 +18,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
@@ -40,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     elevation: 1,
                     borderRadius: BorderRadius.circular(7),
                     child: TextFormField(
+                      onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         prefixIcon: InkWell(
                           onTap: () {},

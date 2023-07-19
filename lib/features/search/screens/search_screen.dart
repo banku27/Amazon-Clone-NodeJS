@@ -1,9 +1,12 @@
+import 'package:amazon_clone_nodejs/features/search/services/search_services.dart';
 import 'package:amazon_clone_nodejs/models/product.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/loader.dart';
 import '../../../constants/global_variables.dart';
 import '../../home/widgets/address_box.dart';
+import '../../product/screens/product_details_screen.dart';
+import '../widgets/searched_product.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String routeName = '/search-screen';
@@ -19,19 +22,19 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   List<Product>? products;
-  // final SearchServices searchServices = SearchServices();
+  final SearchServices searchServices = SearchServices();
 
   @override
   void initState() {
     super.initState();
-    // fetchSearchedProduct();
+    fetchSearchedProduct();
   }
 
-  // fetchSearchedProduct() async {
-  //   products = await searchServices.fetchSearchedProduct(
-  //       context: context, searchQuery: widget.searchQuery);
-  //   setState(() {});
-  // }
+  fetchSearchedProduct() async {
+    products = await searchServices.fetchSearchedProduct(
+        context: context, searchQuery: widget.searchQuery);
+    setState(() {});
+  }
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
@@ -123,14 +126,17 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemCount: products!.length,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                          onTap: () {
-                            // Navigator.pushNamed(
-                            //   context,
-                            //   ProductDetailScreen.routeName,
-                            //   arguments: products![index],
-                            // );
-                          },
-                          child: const Text('data'));
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            ProductDetailScreen.routeName,
+                            arguments: products![index],
+                          );
+                        },
+                        child: SearchedProduct(
+                          product: products![index],
+                        ),
+                      );
                     },
                   ),
                 ),
