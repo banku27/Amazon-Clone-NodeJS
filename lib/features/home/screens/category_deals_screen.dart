@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../common/loader.dart';
 import '../../../constants/global_variables.dart';
 import '../../../models/product.dart';
+import '../services/home_services.dart';
 
 class CategoryDealsScreen extends StatefulWidget {
   static const String routeName = '/category-deals';
@@ -18,21 +19,21 @@ class CategoryDealsScreen extends StatefulWidget {
 
 class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
   List<Product>? productList;
-  // final HomeServices homeServices = HomeServices();
+  final HomeServices homeServices = HomeServices();
 
   @override
   void initState() {
     super.initState();
-    // fetchCategoryProducts();
+    fetchCategoryProducts();
   }
 
-  // fetchCategoryProducts() async {
-  //   productList = await homeServices.fetchCategoryProducts(
-  //     context: context,
-  //     category: widget.category,
-  //   );
-  //   setState(() {});
-  // }
+  fetchCategoryProducts() async {
+    productList = await homeServices.fetchCategoryProducts(
+      context: context,
+      category: widget.category,
+    );
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {

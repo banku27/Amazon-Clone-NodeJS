@@ -9,7 +9,7 @@ import '../../../constants/error_handling.dart';
 import '../../../constants/global_variables.dart';
 import '../../../provider/user_provider.dart';
 
-class HomeService {
+class HomeServices {
   Future<List<Product>> fetchCategoryProducts({
     required BuildContext context,
     required String category,
@@ -17,7 +17,7 @@ class HomeService {
     final user = Provider.of<UserProvider>(context, listen: false).user;
     List<Product> productList = [];
     try {
-      http.Response res = await http.post(
+      http.Response res = await http.get(
         Uri.parse('$uri/api/products?category=$category'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
