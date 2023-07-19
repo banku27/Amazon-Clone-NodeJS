@@ -3,6 +3,7 @@ const mongoose=require("mongoose")
 const dotenv= require('dotenv');
 const authRouter=require("./routes/auth");
 const adminRouter = require("./routes/admin");
+const productRouter = require("./routes/product");
 dotenv.config();
 
 mongoose.connect(
@@ -13,6 +14,7 @@ const app=express();
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 app.listen(process.env.PORT,()=>{
     console.log(`Connected at port ${process.env.PORT}`);
 });
