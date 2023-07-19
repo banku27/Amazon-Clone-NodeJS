@@ -159,11 +159,13 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 CustomTextField(
                   controller: priceController,
                   hintText: 'Price',
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
                 CustomTextField(
                   controller: quantityController,
                   hintText: 'Quantity',
+                  keyboardType: TextInputType.number,
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
