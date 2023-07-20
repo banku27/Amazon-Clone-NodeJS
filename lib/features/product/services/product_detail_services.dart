@@ -34,7 +34,9 @@ class ProductDetailsServices {
       httpErrorHandle(
         response: res,
         context: context,
-        onSuccess: () {},
+        onSuccess: () {
+          showSnackBar(context, 'Ratings Updated');
+        },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
