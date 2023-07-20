@@ -2,10 +2,12 @@ import 'package:amazon_clone_nodejs/models/product.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../../common/widgets/custom_button.dart';
 import '../../../common/widgets/rating_star.dart';
 import '../../../constants/global_variables.dart';
+import '../../../provider/user_provider.dart';
 import '../../search/screens/search_screen.dart';
 import '../services/product_detail_services.dart';
 
@@ -29,6 +31,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    double totalRating = 0;
+    for (int i = 0; i < widget.product.rating!.length; i++) {
+      totalRating += widget.product.rating![i].rating;
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        myRating = widget.product.rating![i].rating;
+      }
+    }
+
+    if (totalRating != 0) {
+      avgRating = totalRating / widget.product.rating!.length;
+    }
   }
 
   @override
@@ -118,8 +137,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Text(
                     widget.product.id!,
                   ),
-                  const Stars(
-                    rating: 3,
+                  Stars(
+                    rating: avgRating,
                   ),
                 ],
               ),
