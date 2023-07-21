@@ -6,7 +6,7 @@ import '../../../common/widgets/custom_button.dart';
 import '../../../constants/global_variables.dart';
 import '../../home/widgets/address_box.dart';
 import '../../search/screens/search_screen.dart';
-import '../widgets/cart_model.dart';
+import '../widgets/cart_product.dart';
 import '../widgets/cart_subtotal.dart';
 
 class CartScreen extends StatefulWidget {
