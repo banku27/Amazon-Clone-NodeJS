@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/product.dart';
 import '../../../provider/user_provider.dart';
 import '../../product/services/product_detail_services.dart';
+import '../services/cart_services.dart';
 
 class CartProduct extends StatefulWidget {
   final int index;
@@ -19,10 +20,14 @@ class CartProduct extends StatefulWidget {
 class _CartProductState extends State<CartProduct> {
   final ProductDetailsServices productDetailsServices =
       ProductDetailsServices();
-  // final CartServices cartServices = CartServices();
+  final CartServices cartServices = CartServices();
 
   void increaseQuantity(Product product) {
     productDetailsServices.addToCart(context: context, product: product);
+  }
+
+  void decreaseQuantity(Product product) {
+    cartServices.removeFromCart(context: context, product: product);
   }
 
   @override
@@ -109,7 +114,7 @@ class _CartProductState extends State<CartProduct> {
                 child: Row(
                   children: [
                     InkWell(
-                      onTap: () {},
+                      onTap: () => decreaseQuantity(product),
                       child: Container(
                         width: 35,
                         height: 32,
