@@ -120,7 +120,7 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: 'Proceed to Buy (${user.cart.length} items)',
-                onTap: () {},
+                onTap: () => navigateToAddress(sum),
                 color: Colors.yellow[600],
               ),
             ),
