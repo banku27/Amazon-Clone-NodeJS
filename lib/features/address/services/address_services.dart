@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class AddressServices {
   void placeOrder({
     required BuildContext context,
     required String address,
-    required String totalSum,
+    required double totalSum,
   }) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
@@ -76,12 +77,12 @@ class AddressServices {
           User user = userProvider.user.copyWith(
             cart: [],
           );
-
           userProvider.setUserFromModel(user);
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
+      log("Place order failed");
     }
   }
 }

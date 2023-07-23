@@ -6,13 +6,20 @@ import 'package:amazon_clone_nodejs/provider/user_provider.dart';
 import 'package:amazon_clone_nodejs/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 import 'features/auth/screens/auth_screen.dart';
 
 void main() {
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => UserProvider()),
-  ], child: const MyApp()));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
+  Razorpay razorpay = Razorpay();
 }
 
 class MyApp extends StatefulWidget {
