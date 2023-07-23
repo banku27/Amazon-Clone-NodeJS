@@ -92,6 +92,7 @@ class _AddressScreenState extends State<AddressScreen> {
         content: Text('Payment Successful'),
       ),
     );
+    log(addressToBeUsed);
     if (Provider.of<UserProvider>(context, listen: false)
         .user
         .address
@@ -99,7 +100,6 @@ class _AddressScreenState extends State<AddressScreen> {
       addressServices.saveUserAddress(
           context: context, address: addressToBeUsed);
     }
-    log(addressToBeUsed);
     addressServices.placeOrder(
       context: context,
       address: addressToBeUsed,
