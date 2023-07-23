@@ -45,4 +45,43 @@ class AddressServices {
       showSnackBar(context, e.toString());
     }
   }
+
+  void placeOrder({
+    required BuildContext context,
+    required String address,
+    required String totalSum,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/place-order'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({
+          'cart': userProvider.user.cart,
+          'address': address,
+          'totalPrice': totalSum
+        }),
+      );
+
+      // ignore: use_build_context_synchronously
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context, 'Your order has been placed successfully!');
+          User user = userProvider.user.copyWith(
+            cart: [],
+          );
+
+          userProvider.setUserFromModel(user);
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }

@@ -235,7 +235,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             //   color: Colors.black12,
             //   height: 5,
             // ),
-           
+
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
