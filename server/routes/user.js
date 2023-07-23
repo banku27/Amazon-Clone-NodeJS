@@ -70,4 +70,9 @@ userRouter.post("/api/save-user-address",auth , async(req,res)=>{
     }
 });
 
+
+//place order
+
+
+
 module.exports=userRouter;
