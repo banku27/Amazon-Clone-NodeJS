@@ -87,12 +87,12 @@ class _AddressScreenState extends State<AddressScreen> {
     // Handle payment success
     log('Payment Success: ${response.paymentId}');
     razorpayTransactionId = response.paymentId.toString();
+    log(addressToBeUsed);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Payment Successful'),
       ),
     );
-    log(addressToBeUsed);
     if (Provider.of<UserProvider>(context, listen: false)
         .user
         .address
@@ -280,12 +280,14 @@ class _AddressScreenState extends State<AddressScreen> {
               //   ),
               // ),
               CustomButton(
-                text: 'Pay',
-                color: Colors.amber,
-                onTap: () => openCheckout(
-                  double.parse(widget.totalAmount),
-                ),
-              ),
+                  text: 'Pay',
+                  color: Colors.amber,
+                  onTap: () {
+                    payPressed(address);
+                    openCheckout(
+                      double.parse(widget.totalAmount),
+                    );
+                  }),
             ],
           ),
         ),

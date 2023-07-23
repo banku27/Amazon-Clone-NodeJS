@@ -106,7 +106,10 @@ userRouter.post("/api/place-order", auth, async (req, res) => {
       order = await order.save();
       res.json(order);
     } catch (e) {
+
       res.status(500).json({ error: e.message });
+      console.log(res.status(500).json({ error: e.message }));
+      
     }
   });
 

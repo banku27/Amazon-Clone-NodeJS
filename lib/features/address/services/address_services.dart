@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:amazon_clone_nodejs/constants/global_variables.dart';
 import 'package:flutter/material.dart';
@@ -55,25 +54,23 @@ class AddressServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
 
     try {
-      http.Response res = await http.post(
-        Uri.parse('$uri/api/place-order'),
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
-        },
-        body: jsonEncode({
-          'cart': userProvider.user.cart,
-          'address': address,
-          'totalPrice': totalSum
-        }),
-      );
+      http.Response res = await http.post(Uri.parse('$uri/api/place-order'),
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'x-auth-token': userProvider.user.token,
+          },
+          body: jsonEncode({
+            'cart': userProvider.user.cart,
+            'address': address,
+            'totalPrice': totalSum,
+          }));
 
       // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
         onSuccess: () {
-          showSnackBar(context, 'Your order has been placed successfully!');
+          showSnackBar(context, 'Your order has been placed!');
           User user = userProvider.user.copyWith(
             cart: [],
           );
@@ -82,7 +79,6 @@ class AddressServices {
       );
     } catch (e) {
       showSnackBar(context, e.toString());
-      log("Place order failed");
     }
   }
 }
