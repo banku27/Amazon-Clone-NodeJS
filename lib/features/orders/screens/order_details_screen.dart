@@ -224,6 +224,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                   ),
                 ),
                 child: Stepper(
+                  physics: const NeverScrollableScrollPhysics(),
                   currentStep: currentStep,
                   controlsBuilder: (context, details) {
                     if (user.type == 'admin') {
