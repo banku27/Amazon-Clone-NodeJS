@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/widgets/custom_button.dart';
@@ -135,9 +136,12 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Order Date:      '),
+                    Text('Order Date:      ${DateFormat().format(
+                      DateTime.fromMillisecondsSinceEpoch(
+                          widget.order.orderedAt),
+                    )}'),
                     Text('Order ID:          ${widget.order.id}'),
-                    Text('Order Total:      \$${widget.order.totalPrice}'),
+                    Text('Order Total:      ₹${widget.order.totalPrice}'),
                   ],
                 ),
               ),
