@@ -39,4 +39,11 @@ Full Stack Amazon Clone along with Admin Panel
 
 <img src="https://github.com/banku27/banku27/assets/55456058/368a2329-7c5f-48f7-abe7-e91d05c45ccd" width="280" height="600">
 
+# User
+
+<img src="https://github.com/banku27/Amazon-Clone-NodeJS/assets/55456058/a4b9a769-510f-4847-9190-31a444721910" width="280" height="600">
+
+<img src="https://github.com/banku27/Amazon-Clone-NodeJS/assets/55456058/177492fa-30f9-4a0f-a8e9-8d9afb9ea8c1" width="280" height="600">
+
+
 
